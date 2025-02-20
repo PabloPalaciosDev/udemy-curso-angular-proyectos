@@ -1,0 +1,14 @@
+<div>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h3>GifApp</h3>
+      <hr>
+      <button id="btn-dlt-history" (click)="deleteHistory()"   >Limpiar historial</button>
+    </div>
+    <div *ngFor="let tag of tags">
+      <div class="sidebar-item">
+        <button (click)="searchGif(tag)">{{ tag | titlecase }}</button>
+      </div>
+    </div>
+  </div>
+</div>
