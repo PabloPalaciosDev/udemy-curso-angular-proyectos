@@ -1,18 +1,22 @@
-<h3>Agregar Personaje</h3>
-<form (ngSubmit)="onSubmit()">
-  <input
-    type="text"
-    [(ngModel)]="character.name"
-    name="name"
-    placeholder="Nombre del personaje"
-    required/>
+<h3>Agregar: {{ name() }}</h3>
 
-  <input
-    type="number"
-    [(ngModel)]="character.power"
-    name="power"
-    placeholder="Poder de pelea"
-    required/>
+<input
+  type="text"
+  class="form-control"
+  placeholder="Nombre"
+  [value]="name()"
+  (change)="name.set(txtName.value)"
+  (input)="name.set(txtName.value)"
+  #txtName
+/>
 
-  <button type="submit">Agregar</button>
-</form>
+<input
+  type="number"
+  class="form-control mt-2"
+  placeholder="Poder"
+  [value]="power()"
+  (input)="power.set(+txtPower.value)"
+  #txtPower
+/>
+
+<button (click)="addCharacter()" class="mt-2 btn btn-primary">Agregar</button>

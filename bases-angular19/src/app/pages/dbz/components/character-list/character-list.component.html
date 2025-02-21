@@ -1,12 +1,11 @@
 <div class="characters-list">
   <h3>{{ listName() }}</h3>
   <ul>
-    @for (character of characterList(); track character.id) {
+    @for (character of characters(); track character.id) {
     <li>
       <span>{{ character.name }}</span>
       <span>{{ character.power }}</span>
-      <span>{{ computedSignal() }}</span>
-      <button (click)="onDeleteCharacter(character.id)">Eliminar</button>
+      <button (click)="deleteCharacter(character.id)">Eliminar</button>
     </li>
     }
   </ul>

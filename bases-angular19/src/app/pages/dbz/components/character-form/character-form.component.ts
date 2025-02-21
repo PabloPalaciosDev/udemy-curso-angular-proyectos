@@ -1,43 +1,35 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import type { Character } from '../../interfaces/character.interface';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-dbz-character-form',
   templateUrl: './character-form.component.html',
-  styleUrl: './character-form.component.css',
-  imports: [FormsModule, CommonModule],
 })
 export class CharacterFormComponent {
-  @Output()
-  public onNewCharacter: EventEmitter<Character> =
-    new EventEmitter<Character>();
+  name = signal('');
+  power = signal(0);
 
-  public character: Character = {
-    id: '',
-    name: '',
-    power: 0,
-  };
+  onNewCharacter = output<Character>();
 
-  onSubmit(): void {
-    if (this.character.name.trim().length === 0) {
+  addCharacter() {
+    if (!this.name() || !this.power() || this.power() <= 0) {
       return;
     }
 
-    if (this.character.power <= 0) {
-      return;
-    }
-
-    if (this.character.name.length < 0) {
-      return;
-    }
-
-    this.onNewCharacter.emit(this.character);
-    this.character = {
-      id: '',
-      name: '',
-      power: 0,
+    const newCharacter: Character = {
+      id: uuid(),
+      name: this.name(),
+      power: this.power(),
     };
+
+    // this.characters.update((list) => [...list, newCharacter]);
+    this.onNewCharacter.emit(newCharacter);
+    this.resetFields();
+  }
+
+  resetFields() {
+    this.name.set('');
+    this.power.set(0);
   }
 }
