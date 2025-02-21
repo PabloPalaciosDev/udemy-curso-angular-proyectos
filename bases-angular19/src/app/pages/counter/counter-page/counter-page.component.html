@@ -1,0 +1,9 @@
+<h1>{{ title }}</h1>
+<h2>{{ counter }}</h2>
+<h2>Counter signal {{ counterSignal() }}</h2>
+
+<button (click)="increseBy(1)">+1</button>
+<button (click)="decreaseBy(1)">-1</button>
+<button (click)="reset()">Reset</button>
+
+<h2 class="message">Mensaje: {{ message }}</h2>
