@@ -1,10 +1,13 @@
-    <div class="characters-list">
-      <h3>Personajes</h3>
-      <ul>
-        <li *ngFor="let character of characterList;">
-          <span>{{ character.name }}</span>
-          <span>{{ character.power }}</span>
-          <button (click)="onDeleteCharacter(character.id)">Eliminar</button>
-        </li>
-      </ul>
-    </div>
+<div class="characters-list">
+  <h3>{{ listName() }}</h3>
+  <ul>
+    @for (character of characterList(); track character.id) {
+    <li>
+      <span>{{ character.name }}</span>
+      <span>{{ character.power }}</span>
+      <span>{{ computedSignal() }}</span>
+      <button (click)="onDeleteCharacter(character.id)">Eliminar</button>
+    </li>
+    }
+  </ul>
+</div>

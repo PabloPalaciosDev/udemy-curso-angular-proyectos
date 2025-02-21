@@ -1,7 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Output,
+  input,
+} from '@angular/core';
 import type { Character } from '../../interfaces/character.interface';
 import { v4 as uuid } from 'uuid';
 import { CommonModule } from '@angular/common';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-dbz-character-list',
@@ -10,10 +17,16 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
 })
 export class CharacterListComponent {
-  @Input()
-  public characterList: Character[] = [
+  characters = input.required<Character[]>();
+  listName = input.required<string>();
+
+  public characterList = signal<Character[]>([
     { id: uuid(), name: 'Goku', power: 10000 },
-  ];
+  ]);
+
+  computedSignal = computed(() => {
+    return 'computed ';
+  });
 
   @Output()
   onDeleteIdEvent: EventEmitter<string> = new EventEmitter<string>();

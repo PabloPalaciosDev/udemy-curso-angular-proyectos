@@ -5,6 +5,8 @@
     <!-- Lista de Personajes -->
     <div class="characters-list" onsb>
       <app-dbz-character-list
+        listName="Personajes"
+        [characters]="characters()"
         (onDeleteIdEvent)="deleteCharacter($event)"
         [characterList]="getCharacters"
       ></app-dbz-character-list>
